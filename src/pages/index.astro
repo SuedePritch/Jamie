@@ -95,17 +95,16 @@ const description =
     <!-- About: the person, placed after the message and before the policy -->
     <section class="section section--soft" id="about">
       <div class="shell about">
-        <div class="about__media" data-reveal>
-          {photos.about.map((photo, i) => (
-            <Photo
-              src={photo.src}
-              alt={photo.alt}
-              ratio="4 / 5"
-              sizes="(min-width: 52rem) 30vw, (min-width: 34rem) 45vw, 100vw"
-              data-reveal
-              data-reveal-delay={i * 320}
-            />
-          ))}
+        {/* Two separate slots rather than one block: on mobile the second
+            photo moves BELOW the bio, so a reader is not made to scroll
+            past two large images before reaching any text. */}
+        <div class="about__media about__media--lead" data-reveal>
+          <Photo
+            src={photos.about[0].src}
+            alt={photos.about[0].alt}
+            ratio="4 / 5"
+            sizes="(min-width: 52rem) 30vw, (min-width: 34rem) 45vw, 100vw"
+          />
         </div>
 
         <div class="about__copy" data-reveal data-reveal-delay="340">
@@ -127,6 +126,15 @@ const description =
               {group.body.map((para) => <p>{para}</p>)}
             </div>
           ))}
+        </div>
+
+        <div class="about__media about__media--trail" data-reveal>
+          <Photo
+            src={photos.about[1].src}
+            alt={photos.about[1].alt}
+            ratio="4 / 5"
+            sizes="(min-width: 52rem) 30vw, (min-width: 34rem) 45vw, 100vw"
+          />
         </div>
       </div>
     </section>
@@ -405,23 +413,39 @@ const description =
   }
   /* Two photos: side by side on mid widths, stacked in the sticky column
      on desktop where they sit against a long run of bio copy. */
+  /*
+   * Below 52rem the section is a single column and the photos sit where
+   * they fall in the markup: one above the bio, one after it. That keeps
+   * a phone reader from scrolling past two full-height images before any
+   * text appears.
+   */
   .about__media {
     display: grid;
     gap: var(--space-s);
   }
-  @media (min-width: 34rem) and (max-width: 51.999rem) {
-    .about__media {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
 
-  /* The bio runs well past the photos' height, which would otherwise leave
-     a long empty gutter. Sticking the column keeps them with the reader.
-     Offset clears the sticky nav. */
   @media (min-width: 52rem) {
-    .about__media {
+    /* Desktop returns both photos to the left column, stacked, sticky
+       against the long bio. Grid placement does this without reordering
+       the markup, so the mobile reading order stays intact. */
+    .about {
+      grid-template-rows: auto auto;
+    }
+    .about__media--lead {
+      grid-column: 1;
+      grid-row: 1;
       position: sticky;
       top: calc(var(--space-3xl) + var(--space-s));
+      align-self: start;
+    }
+    .about__copy {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+    .about__media--trail {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: start;
     }
   }
 
