@@ -30,7 +30,7 @@ const description = 'Campaign site placeholder — replace before launch.';
           <h1>{site.hero.headline}</h1>
           <p class="lede">{site.hero.sub}</p>
           <div class="actions">
-            <a class="btn btn--accent" href={site.hero.primaryCta.href}>
+            <a class="btn btn--blue" href={site.hero.primaryCta.href}>
               {site.hero.primaryCta.label}
             </a>
             <a class="btn btn--quiet" href={site.hero.secondaryCta.href}>
@@ -95,7 +95,7 @@ const description = 'Campaign site placeholder — replace before launch.';
     </section>
 
     <!-- Quote -->
-    <section class="section section--ink">
+    <section class="section section--charcoal">
       <div class="shell">
         <figure class="quote" data-reveal>
           <blockquote><p>{site.quote.text}</p></blockquote>
@@ -110,7 +110,7 @@ const description = 'Campaign site placeholder — replace before launch.';
         <h2>{site.involved.heading}</h2>
         <p class="lede">{site.involved.body}</p>
         <div class="actions">
-          <a class="btn btn--accent" href={site.involved.ctaHref}>{site.involved.ctaLabel}</a>
+          <a class="btn btn--blue" href={site.involved.ctaHref}>{site.involved.ctaLabel}</a>
           <a class="btn btn--quiet" href={`mailto:${site.involved.email}`}>{site.involved.email}</a>
         </div>
       </div>
@@ -131,9 +131,9 @@ const description = 'Campaign site placeholder — replace before launch.';
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgb(250 248 245 / 0.88);
+    background: rgb(255 255 255 / 0.88);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgb(22 36 61 / 0.08);
+    border-bottom: 1px solid rgb(35 48 59 / 0.08);
   }
   .nav__inner {
     display: flex;
@@ -143,7 +143,7 @@ const description = 'Campaign site placeholder — replace before launch.';
     padding-block: var(--space-xs);
   }
   .nav__mark {
-    color: var(--ink);
+    color: var(--charcoal);
     font-family: var(--font-display);
     font-size: var(--step-1);
     font-weight: 600;
@@ -157,7 +157,7 @@ const description = 'Campaign site placeholder — replace before launch.';
     list-style: none;
   }
   .nav__list a {
-    color: var(--ink);
+    color: var(--charcoal);
     font-size: var(--step--1);
     letter-spacing: 0.04em;
     text-decoration: none;
@@ -191,7 +191,7 @@ const description = 'Campaign site placeholder — replace before launch.';
     }
   }
   .eyebrow {
-    color: var(--accent);
+    color: var(--blue);
     font-size: var(--step--1);
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -219,27 +219,30 @@ const description = 'Campaign site placeholder — replace before launch.';
     text-decoration: none;
     transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
   }
-  .btn--accent {
-    background: var(--accent);
+  .btn--blue {
+    background: var(--blue);
     color: var(--white);
   }
-  .btn--accent:hover {
-    background: var(--accent-dark);
+  .btn--blue:hover {
+    background: var(--blue-dark);
   }
   .btn--quiet {
-    border: 1px solid rgb(22 36 61 / 0.25);
-    color: var(--ink);
+    border: 1px solid rgb(35 48 59 / 0.25);
+    color: var(--charcoal);
   }
   .btn--quiet:hover {
-    background: var(--mist);
+    background: var(--pale);
   }
 
   /* Sections */
   .section--tint {
-    background: var(--mist);
+    background: var(--pale);
   }
-  .section--ink {
-    background: var(--ink);
+  /* The quote is the one deep-blue moment on the page — it breaks up an
+     otherwise light layout and gives the blue somewhere to be dominant
+     rather than decorative. */
+  .section--charcoal {
+    background: var(--blue-dark);
   }
 
   /* About */
@@ -294,13 +297,13 @@ const description = 'Campaign site placeholder — replace before launch.';
   }
   .card {
     padding: var(--space-l);
-    background: var(--offwhite);
+    background: var(--ground);
     border-radius: var(--radius);
   }
   .card__num {
     display: block;
     margin-bottom: var(--space-s);
-    color: var(--accent);
+    color: var(--blue);
     font-family: var(--font-display);
     font-size: var(--step-2);
     font-weight: 600;
@@ -346,7 +349,7 @@ const description = 'Campaign site placeholder — replace before launch.';
   }
   .quote figcaption {
     margin-top: var(--space-m);
-    color: var(--mist);
+    color: var(--pale);
     font-size: var(--step--1);
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -363,8 +366,8 @@ const description = 'Campaign site placeholder — replace before launch.';
   /* Footer */
   .footer {
     padding-block: var(--space-xl);
-    background: var(--ink);
-    color: var(--mist);
+    background: var(--charcoal);
+    color: var(--pale);
   }
   .footer__inner {
     display: flex;

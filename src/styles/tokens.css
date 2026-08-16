@@ -1,23 +1,28 @@
 /*
  * Design tokens.
  *
- * Palette contrast is verified against WCAG AA for body text. Two pairings
- * sit near the 4.5 floor and constrain edits:
- *   --gray on --mist     = 4.50  (exactly at the limit)
- *   --accent on --offwhite = 4.60
- * Do not lighten --gray, --mist, or --accent without re-checking contrast.
+ * Light blue + crisp white + charcoal. Blue carries the identity; charcoal
+ * does the text work.
+ *
+ * CONTRAST — measured, not eyeballed. The pale --sky (#7FB2DC) scores only
+ * 2.26 against white, so it is a FILL COLOR ONLY. It must never carry text
+ * and must never have white text placed on it. Two rules follow:
+ *   - CTA labels on --sky are --charcoal (5.97), never white (2.26).
+ *   - Any blue that carries text uses --blue (#356FAC), the lightest blue
+ *     passing AA on both white (5.22) and --pale (4.51).
+ * Do not lighten --blue or darken --pale without re-checking.
  */
 
 :root {
   /* Palette */
-  --ink: #16243d;
-  --ink-soft: #24365a;
-  --gray: #6b665f;
-  --offwhite: #faf8f5;
-  --mist: #dce6f0;
-  --accent: #b4553c;
-  --accent-dark: #8f4130;
+  --charcoal: #23303b;
+  --charcoal-soft: #3d4c59;
+  --blue: #356fac;
+  --blue-dark: #2c639f;
+  --sky: #7fb2dc;
+  --pale: #e4f0fa;
   --white: #fff;
+  --ground: #fff;
 
   /* Fluid type scale. clamp() keeps this mobile-first without breakpoint
      thrash — every step scales continuously between 360px and 1280px. */
