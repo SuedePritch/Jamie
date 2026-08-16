@@ -16,7 +16,9 @@
 
 // Studio session — seated indoors, blazer, fireplace behind.
 import studioHeadshot from '../assets/photos-studio/1000029826.webp';
-import studioSeatedHands from '../assets/photos-studio/1000029827.webp';
+// Candid, supplied already cropped to 4:5 (1600x2000) so it needs no
+// further crop — it fills the frame exactly as composed.
+import aboutCandid from '../assets/photos-studio/about-candid.webp';
 
 export const photos = {
   /*
@@ -28,10 +30,14 @@ export const photos = {
     alt: 'Portrait of Jamie Scrimger, seated indoors in a light green blazer and white shirt, looking at the camera.',
   },
 
-  // About: seated, hands clasped — relaxed and conversational.
+  /*
+   * About: a candid, deliberately less formal than the hero. The studio
+   * headshot does the first-impression work up top; this sits alongside
+   * the personal history, where a relaxed photo suits the copy better.
+   */
   about: {
-    src: studioSeatedHands,
-    alt: 'Jamie Scrimger seated in a wooden chair, hands clasped, in front of a fireplace and stacked firewood.',
+    src: aboutCandid,
+    alt: 'Jamie Scrimger outdoors in a ball cap and patterned shirt, a cruise ship docked at the waterfront behind her.',
   },
 
 } as const;
