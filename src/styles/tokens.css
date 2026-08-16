@@ -113,6 +113,26 @@
   --radius: 2px;
   --shell: 1180px;
 
+  /*
+   * Motion. All timing lives here — no durations hardcoded in components,
+   * so the whole page can be paced from one block.
+   *
+   * Slow and gentle by design: this is a civic site, and quick snappy
+   * motion reads as promotional. The easing curve decelerates hard, so
+   * these durations feel calmer than the numbers suggest.
+   */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --reveal-duration: 800ms;
+
+  /* Section and element reveals on scroll. */
+  --reveal-duration: 1400ms;
+  /* Gap between staggered siblings (cards, gallery items). */
+  --reveal-stagger: 160ms;
+
+  /* The hero slogan: each word is its own beat. The gap between words is
+     NOT a token — it has to be emitted per-word in the markup as a real
+     time value (see SLOGAN_STAGGER_MS in index.astro). */
+  --slogan-duration: 1100ms;
+
+  /* Interface feedback (hovers) stays quick — slow hovers feel broken. */
+  --ui-duration: 200ms;
 }

@@ -31,9 +31,16 @@ export function initReveal(): void {
         observer.unobserve(entry.target);
       }
     },
-    // Trigger slightly before the element reaches the viewport edge so the
-    // motion feels anticipatory rather than late.
-    { rootMargin: '0px 0px -12% 0px', threshold: 0.1 },
+    /*
+     * threshold 0 — fire as soon as ANY part of the element enters. A
+     * fractional threshold is unreliable here because several targets are
+     * taller than the viewport, so the required fraction of their own
+     * height can never be on screen at once and they would never reveal.
+     *
+     * The negative bottom margin holds the trigger back slightly so the
+     * motion reads as deliberate rather than pre-emptive.
+     */
+    { rootMargin: '0px 0px -5% 0px', threshold: 0 },
   );
 
   for (const el of targets) {
@@ -42,6 +49,18 @@ export function initReveal(): void {
     if (delay) el.style.setProperty('--reveal-delay', `${delay}ms`);
     observer.observe(el);
   }
+
+  /*
+   * Safety net. Anything still hidden shortly after load is revealed
+   * unconditionally — an element the observer never fires for (a layout
+   * quirk, a target taller than the viewport, a browser edge case) would
+   * otherwise stay invisible forever, which is far worse than losing an
+   * animation. Content visibility must never depend on the observer
+   * behaving.
+   */
+  window.setTimeout(() => {
+    for (const el of targets) el.classList.add(REVEALED);
+  }, 2500);
 
   // If the visitor flips reduced-motion mid-session, honour it immediately.
   reducedMotion.addEventListener('change', (event) => {

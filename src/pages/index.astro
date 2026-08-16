@@ -3,6 +3,11 @@ import Base from '../layouts/Base.astro';
 import Placeholder from '../components/Placeholder.astro';
 import { site } from '../content/site';
 
+// Gap between slogan words. Kept here rather than in CSS because the delay
+// has to be emitted per-word as a real time value — see the note on
+// .slogan__word for why calc() from an index does not work.
+const SLOGAN_STAGGER_MS = 280;
+
 const title = `${site.candidate} — ${site.office}, ${site.city}`;
 const description =
   'Listen. Respect. Deliver. Jamie Scrimger for Thunder Bay City Council.';
@@ -30,7 +35,9 @@ const description =
           <p class="eyebrow">{site.office} · {site.city}</p>
           <h1 class="slogan">
             {site.hero.slogan.map((word, i) => (
-              <span class="slogan__word" style={`--i:${i}`}>{word}</span>
+              <span class="slogan__word" style={`--word-delay:${i * SLOGAN_STAGGER_MS}ms`}>
+                {word}
+              </span>
             ))}
           </h1>
           <p class="lede">{site.hero.intro}</p>
@@ -43,7 +50,7 @@ const description =
             </a>
           </div>
         </div>
-        <div class="hero__portrait" data-reveal data-reveal-delay="140">
+        <div class="hero__portrait" data-reveal data-reveal-delay="260">
           <Placeholder ratio="4 / 5" label="Portrait of Jamie" />
         </div>
       </div>
@@ -53,7 +60,7 @@ const description =
     <section class="section section--tint">
       <div class="shell opening">
         <h2 data-reveal>{site.opening.heading}</h2>
-        <div class="opening__body" data-reveal data-reveal-delay="100">
+        <div class="opening__body" data-reveal data-reveal-delay="200">
           {site.opening.body.map((para) => <p>{para}</p>)}
         </div>
       </div>
@@ -84,7 +91,7 @@ const description =
         <h2 data-reveal>Priorities</h2>
         <ul class="themes">
           {site.priorities.map((p, i) => (
-            <li class="theme" data-reveal data-reveal-delay={(i % 3) * 90}>
+            <li class="theme" data-reveal data-reveal-delay={(i % 3) * 170}>
               <h3>{p.title}</h3>
               <p class="theme__areas">{p.areas.join(' · ')}</p>
             </li>
@@ -111,7 +118,7 @@ const description =
               label={label}
               class="gallery__item"
               data-reveal
-              data-reveal-delay={(i % 3) * 90}
+              data-reveal-delay={(i % 3) * 170}
             />
           ))}
         </div>
@@ -224,27 +231,10 @@ const description =
   .slogan__word {
     display: block;
   }
-  .reveal-ready .slogan__word {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  .reveal-ready [data-reveal].is-visible .slogan__word {
-    opacity: 1;
-    transform: none;
-    transition:
-      opacity 620ms var(--ease-out),
-      transform 620ms var(--ease-out);
-    /* Each word follows the last: the slogan reads as three beats. */
-    transition-delay: calc(var(--i) * 160ms);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal-ready .slogan__word,
-    .reveal-ready [data-reveal].is-visible .slogan__word {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
+  /* The per-word reveal rules live in global.css, NOT here: Astro scopes
+     component styles with a [data-astro-cid-*] attribute, and .reveal-ready
+     sits on <html>, which carries no such attribute — so a scoped rule for
+     it silently never matches. */
 
   .eyebrow {
     color: var(--color-accent);
@@ -273,7 +263,7 @@ const description =
     font-size: var(--step-0);
     font-weight: 600;
     text-decoration: none;
-    transition: background-color 200ms var(--ease-out);
+    transition: background-color var(--ui-duration) var(--ease-out);
   }
   .btn--solid {
     background: var(--color-accent);

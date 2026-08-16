@@ -137,12 +137,41 @@ a {
   transition-delay: var(--reveal-delay, 0ms);
 }
 
+/*
+ * Hero slogan — each word reveals as its own beat.
+ *
+ * These rules must live in GLOBAL css, not in the page component. Astro
+ * scopes component styles with a [data-astro-cid-*] attribute selector,
+ * and .reveal-ready sits on <html>, which carries no such attribute, so
+ * the scoped variant silently never matches.
+ *
+ * The per-word delay is emitted in the markup as a real time value rather
+ * than computed here from an index: calc() multiplying an untyped custom
+ * property by a duration resolves to 0s without erroring.
+ */
+.reveal-ready .slogan__word {
+  display: block;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal-ready [data-reveal].is-visible .slogan__word {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--slogan-duration) var(--ease-out),
+    transform var(--slogan-duration) var(--ease-out);
+  transition-delay: var(--word-delay, 0ms);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   /* Motion is removed entirely, not merely shortened. */
+  .reveal-ready .slogan__word,
+  .reveal-ready [data-reveal].is-visible .slogan__word,
   .reveal-ready [data-reveal],
   .reveal-ready [data-reveal].is-visible {
     opacity: 1;
