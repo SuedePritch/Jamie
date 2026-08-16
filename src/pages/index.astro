@@ -64,7 +64,7 @@ const description =
     </section>
 
     <!-- Opening statement -->
-    <section class="section section--tint">
+    <section class="section section--deep">
       <div class="shell opening">
         <h2 data-reveal>{site.opening.heading}</h2>
         <div class="opening__body" data-reveal data-reveal-delay="380">
@@ -313,9 +313,15 @@ const description =
   }
 
   /* Opening */
+  /* On the deep band the default heading/body colours would be near-black
+     on navy, so this section inverts its own text. */
   .opening {
     display: grid;
     gap: var(--space-m);
+    color: var(--color-text-muted-on-inverse);
+  }
+  .opening :global(h2) {
+    color: var(--color-text-on-inverse);
   }
   @media (min-width: 52rem) {
     .opening {
