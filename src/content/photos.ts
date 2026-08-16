@@ -19,6 +19,9 @@ import studioHeadshot from '../assets/photos-studio/1000029826.webp';
 // Candid, supplied already cropped to 4:5 (1600x2000) so it needs no
 // further crop — it fills the frame exactly as composed.
 import aboutCandid from '../assets/photos-studio/about-candid.webp';
+// Arrived as a rotated 2.2:1 panorama; rotated upright and cropped to 4:5
+// from the top, which keeps both faces in frame.
+import puppy from '../assets/photos-studio/puppy.webp';
 
 export const photos = {
   /*
@@ -31,13 +34,19 @@ export const photos = {
   },
 
   /*
-   * About: a candid, deliberately less formal than the hero. The studio
-   * headshot does the first-impression work up top; this sits alongside
-   * the personal history, where a relaxed photo suits the copy better.
+   * About: two candids, deliberately less formal than the hero. The studio
+   * headshot does the first-impression work up top; these sit alongside the
+   * personal history, where relaxed photos suit the copy better.
    */
-  about: {
-    src: aboutCandid,
-    alt: 'Jamie Scrimger outdoors in a ball cap and patterned shirt, a cruise ship docked at the waterfront behind her.',
-  },
+  about: [
+    {
+      src: aboutCandid,
+      alt: 'Jamie Scrimger outdoors in a ball cap and patterned shirt, a cruise ship docked at the waterfront behind her.',
+    },
+    {
+      src: puppy,
+      alt: 'Jamie Scrimger holding a springer spaniel puppy, both looking towards the camera.',
+    },
+  ],
 
 } as const;

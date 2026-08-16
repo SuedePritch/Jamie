@@ -96,12 +96,16 @@ const description =
     <section class="section" id="about">
       <div class="shell about">
         <div class="about__media" data-reveal>
-          <Photo
-            src={photos.about.src}
-            alt={photos.about.alt}
-            ratio="4 / 5"
-            sizes="(min-width: 52rem) 30vw, 100vw"
-          />
+          {photos.about.map((photo, i) => (
+            <Photo
+              src={photo.src}
+              alt={photo.alt}
+              ratio="4 / 5"
+              sizes="(min-width: 52rem) 30vw, (min-width: 34rem) 45vw, 100vw"
+              data-reveal
+              data-reveal-delay={i * 320}
+            />
+          ))}
         </div>
 
         <div class="about__copy" data-reveal data-reveal-delay="340">
@@ -390,9 +394,21 @@ const description =
       gap: var(--space-2xl);
     }
   }
-  /* The bio runs well past the portrait's height, which would otherwise
-     leave a long empty gutter. Sticking the portrait keeps it with the
-     reader instead. Offset clears the sticky nav. */
+  /* Two photos: side by side on mid widths, stacked in the sticky column
+     on desktop where they sit against a long run of bio copy. */
+  .about__media {
+    display: grid;
+    gap: var(--space-s);
+  }
+  @media (min-width: 34rem) and (max-width: 51.999rem) {
+    .about__media {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* The bio runs well past the photos' height, which would otherwise leave
+     a long empty gutter. Sticking the column keeps them with the reader.
+     Offset clears the sticky nav. */
   @media (min-width: 52rem) {
     .about__media {
       position: sticky;
