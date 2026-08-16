@@ -1,0 +1,56 @@
+---
+/*
+ * Stand-in for a real photograph.
+ *
+ * Holds the exact aspect ratio the final image will occupy so the layout is
+ * already correct — and so swapping in a real <Image> does not shift
+ * anything. Visibly marked as a placeholder on purpose: it should be
+ * impossible to ship one of these by accident.
+ */
+interface Props {
+  ratio?: string;
+  label: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+// Rest props are forwarded so callers can attach data-reveal etc.
+const { ratio = '4 / 5', label, class: className, ...rest } = Astro.props;
+---
+
+<div
+  class:list={['ph', className]}
+  style={`--ratio:${ratio}`}
+  role="img"
+  aria-label={`Placeholder: ${label}`}
+  {...rest}
+>
+  <span>{label}</span>
+</div>
+
+<style>
+  .ph {
+    aspect-ratio: var(--ratio);
+    display: grid;
+    place-items: center;
+    padding: var(--space-s);
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0 12px,
+        rgb(22 36 61 / 0.04) 12px 24px
+      ),
+      var(--mist);
+    border: 1px dashed rgb(22 36 61 / 0.28);
+    border-radius: var(--radius);
+  }
+
+  .ph span {
+    color: var(--ink);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+</style>

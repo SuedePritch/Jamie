@@ -1,17 +1,382 @@
 ---
-import { url } from '../lib/url';
+import Base from '../layouts/Base.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { site } from '../content/site';
+
+const title = `${site.candidate} for ${site.office}`;
+const description = 'Campaign site placeholder — replace before launch.';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
-		<link rel="icon" href={url('/favicon.ico')} />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base title={title} description={description}>
+  <header class="nav">
+    <div class="shell nav__inner">
+      <a class="nav__mark" href="#top">{site.candidate}</a>
+      <nav aria-label="Primary">
+        <ul class="nav__list">
+          {site.nav.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="shell hero__inner">
+        <div class="hero__copy" data-reveal>
+          <p class="eyebrow">{site.office} · {site.ward}</p>
+          <h1>{site.hero.headline}</h1>
+          <p class="lede">{site.hero.sub}</p>
+          <div class="actions">
+            <a class="btn btn--accent" href={site.hero.primaryCta.href}>
+              {site.hero.primaryCta.label}
+            </a>
+            <a class="btn btn--quiet" href={site.hero.secondaryCta.href}>
+              {site.hero.secondaryCta.label}
+            </a>
+          </div>
+        </div>
+        <div class="hero__portrait" data-reveal data-reveal-delay="120">
+          <Placeholder ratio="4 / 5" label="Hero portrait" />
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="shell about">
+        <div class="about__images" data-reveal>
+          <Placeholder ratio="1 / 1" label="Candid photo" />
+          <Placeholder ratio="1 / 1" label="At work in the community" class="about__offset" />
+        </div>
+        <div class="about__copy" data-reveal data-reveal-delay="120">
+          <h2>{site.about.heading}</h2>
+          {site.about.body.map((para) => <p>{para}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Priorities -->
+    <section class="section section--tint" id="priorities">
+      <div class="shell">
+        <h2 data-reveal>Priorities</h2>
+        <ol class="priorities">
+          {site.priorities.map((item, i) => (
+            <li class="card" data-reveal data-reveal-delay={i * 110}>
+              <span class="card__num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Community gallery -->
+    <section class="section" id="community">
+      <div class="shell">
+        <h2 data-reveal>In the community</h2>
+        <div class="gallery">
+          {['Community event', 'Door knocking', 'Local business', 'Neighbourhood', 'Volunteers', 'Town hall'].map(
+            (label, i) => (
+              <Placeholder
+                ratio={i % 3 === 0 ? '4 / 5' : '1 / 1'}
+                label={label}
+                class="gallery__item"
+                data-reveal
+                data-reveal-delay={(i % 3) * 110}
+              />
+            ),
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="section section--ink">
+      <div class="shell">
+        <figure class="quote" data-reveal>
+          <blockquote><p>{site.quote.text}</p></blockquote>
+          <figcaption>{site.quote.attribution}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Get involved -->
+    <section class="section" id="involved">
+      <div class="shell involved" data-reveal>
+        <h2>{site.involved.heading}</h2>
+        <p class="lede">{site.involved.body}</p>
+        <div class="actions">
+          <a class="btn btn--accent" href={site.involved.ctaHref}>{site.involved.ctaLabel}</a>
+          <a class="btn btn--quiet" href={`mailto:${site.involved.email}`}>{site.involved.email}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <p class="footer__name">{site.candidate} for {site.office}</p>
+      <p class="footer__legal">{site.footer.disclaimer}</p>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  /* Nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgb(250 248 245 / 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgb(22 36 61 / 0.08);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    padding-block: var(--space-xs);
+  }
+  .nav__mark {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .nav__list {
+    display: none;
+    gap: var(--space-m);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .nav__list a {
+    color: var(--ink);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav__list a:hover {
+    text-decoration: underline;
+  }
+  /* Mobile-first: the link row appears only when there is room for it.
+     Below this the nav is just the wordmark — the hero CTA carries the
+     action, so no hamburger is needed for a single-page site. */
+  @media (min-width: 46rem) {
+    .nav__list {
+      display: flex;
+    }
+  }
+
+  /* Hero */
+  .hero {
+    padding-block: var(--space-2xl) var(--space-3xl);
+  }
+  .hero__inner {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  @media (min-width: 52rem) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      align-items: center;
+      gap: var(--space-2xl);
+    }
+  }
+  .eyebrow {
+    color: var(--accent);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-s);
+  }
+  .lede {
+    font-size: var(--step-1);
+    margin-top: var(--space-m);
+  }
+
+  /* Buttons */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    margin-top: var(--space-l);
+  }
+  .btn {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-m);
+    border-radius: var(--radius);
+    font-size: var(--step-0);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
+  }
+  .btn--accent {
+    background: var(--accent);
+    color: var(--white);
+  }
+  .btn--accent:hover {
+    background: var(--accent-dark);
+  }
+  .btn--quiet {
+    border: 1px solid rgb(22 36 61 / 0.25);
+    color: var(--ink);
+  }
+  .btn--quiet:hover {
+    background: var(--mist);
+  }
+
+  /* Sections */
+  .section--tint {
+    background: var(--mist);
+  }
+  .section--ink {
+    background: var(--ink);
+  }
+
+  /* About */
+  .about {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  @media (min-width: 52rem) {
+    .about {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: var(--space-2xl);
+    }
+  }
+  /* Single column on the narrowest screens: side-by-side portraits at
+     ~200px each overflowed the shell on a 420px viewport. */
+  .about__images {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-s);
+  }
+  @media (min-width: 30rem) {
+    .about__images {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    /* Vertical offset — a flush grid reads flat and templated. Paired with
+       the two-column layout, so it never applies to the stacked version. */
+    .about__offset {
+      margin-top: var(--space-l);
+    }
+  }
+  .about__copy h2 {
+    margin-bottom: var(--space-m);
+  }
+  .about__copy p + p {
+    margin-top: var(--space-s);
+  }
+
+  /* Priorities */
+  .priorities {
+    display: grid;
+    gap: var(--space-m);
+    margin-top: var(--space-xl);
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+  }
+  @media (min-width: 46rem) {
+    .priorities {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .card {
+    padding: var(--space-l);
+    background: var(--offwhite);
+    border-radius: var(--radius);
+  }
+  .card__num {
+    display: block;
+    margin-bottom: var(--space-s);
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+  }
+  .card h3 {
+    margin-bottom: var(--space-xs);
+  }
+
+  /* Gallery */
+  .gallery {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-xl);
+    grid-template-columns: 1fr;
+  }
+  /* minmax(0, 1fr) rather than 1fr: grid tracks are min-content by default,
+     so items refuse to shrink below their intrinsic width and blow out the
+     row. This is what caused a 150px horizontal overflow at desktop widths. */
+  @media (min-width: 34rem) {
+    .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 60rem) {
+    .gallery {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Quote */
+  .quote {
+    max-width: 46ch;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .quote blockquote p {
+    max-width: none;
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+  .quote figcaption {
+    margin-top: var(--space-m);
+    color: var(--mist);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Get involved */
+  .involved {
+    max-width: 60ch;
+  }
+  .involved .lede {
+    margin-top: var(--space-s);
+  }
+
+  /* Footer */
+  .footer {
+    padding-block: var(--space-xl);
+    background: var(--ink);
+    color: var(--mist);
+  }
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+  .footer__name {
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+  .footer__legal {
+    font-size: var(--step--1);
+  }
+</style>
