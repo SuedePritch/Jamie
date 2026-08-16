@@ -30,7 +30,7 @@ const description =
 
   <main id="main">
     <!-- Hero -->
-    <section class="hero" id="top">
+    <section class="hero section--soft" id="top">
       <div class="shell hero__inner">
         <div class="hero__copy" data-reveal>
           <p class="eyebrow">{site.office} · {site.city}</p>
@@ -93,7 +93,7 @@ const description =
     </section>
 
     <!-- About: the person, placed after the message and before the policy -->
-    <section class="section" id="about">
+    <section class="section section--soft" id="about">
       <div class="shell about">
         <div class="about__media" data-reveal>
           {photos.about.map((photo, i) => (
@@ -158,7 +158,7 @@ const description =
     </section>
 
     <!-- Get involved -->
-    <section class="section" id="involved">
+    <section class="section section--soft" id="involved">
       <div class="shell involved" data-reveal>
         <h2>{site.involved.heading}</h2>
         <p class="lede">{site.involved.body}</p>
@@ -186,7 +186,7 @@ const description =
     position: sticky;
     top: 0;
     z-index: 20;
-    background: var(--color-surface-translucent);
+    background: var(--color-surface-soft-translucent);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border-faint);
   }
@@ -302,6 +302,9 @@ const description =
   }
 
   /* Sections */
+  .section--soft {
+    background: var(--color-surface-soft);
+  }
   .section--tint {
     background: var(--color-surface-tint);
   }

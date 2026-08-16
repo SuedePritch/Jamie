@@ -33,10 +33,11 @@
   /* ---- 1. Raw palette — the only hex values in the codebase ---- */
   --tone-ink: #23303b;
   --tone-ink-soft: #3d4c59;
-  --tone-brand: #356fac;
-  --tone-brand-deep: #2c639f;
+  --tone-brand: #255690;
+  --tone-brand-deep: #17406e;
   --tone-brand-light: #7fb2dc;
-  --tone-brand-pale: #e4f0fa;
+  --tone-brand-pale: #c9dff2;
+  --tone-brand-wash: #eaf3fb;
   --tone-base: #fff;
 
   /* ---- 2. Semantic roles — what the codebase actually uses ---- */
@@ -44,6 +45,9 @@
   /* Surfaces */
   --color-surface: var(--tone-base);
   --color-surface-tint: var(--tone-brand-pale);
+  /* A lighter wash than the full tint, so consecutive sections can alternate
+     without every other one dropping back to bare white. */
+  --color-surface-soft: var(--tone-brand-wash);
   --color-surface-inverse: var(--tone-ink);
   --color-surface-feature: var(--tone-brand-deep);
 
@@ -78,6 +82,10 @@
   --color-border-dashed: rgb(var(--tone-ink-rgb) / 0.28);
   --color-wash: rgb(var(--tone-ink-rgb) / 0.04);
   --color-surface-translucent: rgb(var(--tone-base-rgb) / 0.9);
+  /* The nav sits over the tinted hero, so it matches that wash rather than
+     staying white — a white bar over a coloured section reads as a seam. */
+  --tone-wash-rgb: 234 243 251;
+  --color-surface-soft-translucent: rgb(var(--tone-wash-rgb) / 0.92);
   --color-decorative: var(--tone-brand-light);
 
   /* Fluid type scale. clamp() keeps this mobile-first without breakpoint
