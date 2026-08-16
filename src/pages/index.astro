@@ -1,12 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
-import Placeholder from '../components/Placeholder.astro';
+import Photo from '../components/Photo.astro';
 import { site } from '../content/site';
+import { photos } from '../content/photos';
 
 // Gap between slogan words. Kept here rather than in CSS because the delay
 // has to be emitted per-word as a real time value — see the note on
 // .slogan__word for why calc() from an index does not work.
-const SLOGAN_STAGGER_MS = 280;
+const SLOGAN_STAGGER_MS = 520;
 
 const title = `${site.candidate} — ${site.office}, ${site.city}`;
 const description =
@@ -50,8 +51,14 @@ const description =
             </a>
           </div>
         </div>
-        <div class="hero__portrait" data-reveal data-reveal-delay="260">
-          <Placeholder ratio="4 / 5" label="Portrait of Jamie" />
+        <div class="hero__portrait" data-reveal data-reveal-delay="480">
+          <Photo
+            src={photos.hero.src}
+            alt={photos.hero.alt}
+            ratio="4 / 5"
+            priority
+            sizes="(min-width: 52rem) 42vw, 100vw"
+          />
         </div>
       </div>
     </section>
@@ -60,7 +67,7 @@ const description =
     <section class="section section--tint">
       <div class="shell opening">
         <h2 data-reveal>{site.opening.heading}</h2>
-        <div class="opening__body" data-reveal data-reveal-delay="200">
+        <div class="opening__body" data-reveal data-reveal-delay="380">
           {site.opening.body.map((para) => <p>{para}</p>)}
         </div>
       </div>
@@ -89,10 +96,15 @@ const description =
     <section class="section" id="about">
       <div class="shell about">
         <div class="about__media" data-reveal>
-          <Placeholder ratio="4 / 5" label="Jamie — portrait" />
+          <Photo
+            src={photos.about.src}
+            alt={photos.about.alt}
+            ratio="4 / 5"
+            sizes="(min-width: 52rem) 30vw, 100vw"
+          />
         </div>
 
-        <div class="about__copy" data-reveal data-reveal-delay="180">
+        <div class="about__copy" data-reveal data-reveal-delay="340">
           <h2>{site.about.heading}</h2>
           <p class="about__lead">{site.about.lead}</p>
 
@@ -121,37 +133,12 @@ const description =
         <h2 data-reveal>Priorities</h2>
         <ul class="themes">
           {site.priorities.map((p, i) => (
-            <li class="theme" data-reveal data-reveal-delay={(i % 3) * 170}>
+            <li class="theme" data-reveal data-reveal-delay={(i % 3) * 320}>
               <h3>{p.title}</h3>
               <p class="theme__areas">{p.areas.join(' · ')}</p>
             </li>
           ))}
         </ul>
-      </div>
-    </section>
-
-    <!-- Community photography -->
-    <section class="section" id="community">
-      <div class="shell">
-        <h2 data-reveal>In the community</h2>
-        <div class="gallery">
-          {[
-            'Community event',
-            'Door knocking',
-            'Local business',
-            'Neighbourhood',
-            'Volunteers',
-            'Town hall',
-          ].map((label, i) => (
-            <Placeholder
-              ratio={i % 3 === 0 ? '4 / 5' : '1 / 1'}
-              label={label}
-              class="gallery__item"
-              data-reveal
-              data-reveal-delay={(i % 3) * 170}
-            />
-          ))}
-        </div>
       </div>
     </section>
 
@@ -502,24 +489,6 @@ const description =
     color: var(--color-text);
     font-size: var(--step--1);
     letter-spacing: 0.02em;
-  }
-
-  /* Gallery */
-  .gallery {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-s);
-    margin-top: var(--space-xl);
-  }
-  @media (min-width: 34rem) {
-    .gallery {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (min-width: 60rem) {
-    .gallery {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
   }
 
   /* Closing */

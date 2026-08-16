@@ -60,7 +60,7 @@ export function initReveal(): void {
    */
   window.setTimeout(() => {
     for (const el of targets) el.classList.add(REVEALED);
-  }, 2500);
+  }, 6000);
 
   // If the visitor flips reduced-motion mid-session, honour it immediately.
   reducedMotion.addEventListener('change', (event) => {

@@ -24,7 +24,6 @@ export const site = {
     { label: 'Commitment', href: '#commitment' },
     { label: 'About', href: '#about' },
     { label: 'Priorities', href: '#priorities' },
-    { label: 'Community', href: '#community' },
     { label: 'Get involved', href: '#involved' },
   ],
 
@@ -51,8 +50,6 @@ export const site = {
    * where she comes from, and what she has done. Keep it factual and
    * verifiable: biography on a campaign site gets scrutinised, so every
    * claim here needs to be one Jamie can stand behind.
-   *
-   * ALL PLACEHOLDER — awaiting real copy.
    */
   about: {
     heading: 'About Jamie',
@@ -88,7 +85,6 @@ export const site = {
       {
         title: 'How I approach leadership',
         body: [
-          'These experiences have shaped how I approach leadership.',
           'I believe good leaders don’t need to have all the answers. They need to listen, ask the right questions, understand the facts, bring people together and make thoughtful decisions.',
           'I also believe we can disagree without becoming divided. Municipal politics should be about solving problems—not personal attacks. I will be prepared to challenge ideas and ask difficult questions, while treating people with respect.',
         ],

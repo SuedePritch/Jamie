@@ -1,0 +1,81 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/*
+ * A photograph, cropped to a fixed aspect ratio.
+ *
+ * Wraps astro:assets so every photo on the site gets the same treatment:
+ * AVIF with automatic fallback, a responsive srcset, and explicit
+ * dimensions so nothing shifts as images arrive.
+ */
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  ratio?: string;
+  /* Above-the-fold images must not be lazy — the hero especially, where a
+     lazy load costs the largest-contentful-paint measurement. */
+  priority?: boolean;
+  sizes?: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  src,
+  alt,
+  ratio = '4 / 5',
+  priority = false,
+  sizes = '(min-width: 52rem) 45vw, 100vw',
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<div class:list={['photo', className]} style={`--ratio:${ratio}`} {...rest}>
+  <!-- Picture rather than Image: emits AVIF with a WebP fallback, which
+       runs meaningfully smaller than WebP alone on photographic content.
+       fallbackFormat is webp rather than the default jpg — a JPEG tier
+       would triple the build's image weight to serve browsers that
+       support neither format, of which there are effectively none. -->
+  <Picture
+    src={src}
+    alt={alt}
+    formats={['avif']}
+    fallbackFormat="webp"
+    widths={[400, 800, 1200, 1600]}
+    sizes={sizes}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    decoding={priority ? 'sync' : 'async'}
+  />
+</div>
+
+<style>
+  .photo {
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+    border-radius: var(--radius);
+    /* A tinted ground behind the image, so the space is never blank
+       while a lazy image is still arriving. */
+    background: var(--color-surface-tint);
+  }
+
+  /* <Picture> wraps the img in a <picture> element. Without giving that
+     wrapper the container's height, the img has no height to inherit and
+     collapses to its natural aspect ratio inside the cropped box. */
+  .photo :global(picture) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .photo :global(img) {
+    width: 100%;
+    height: 100%;
+    /* Crop rather than distort. The subject sits slightly above centre in
+       most of these frames, so bias the crop upward to keep faces in. */
+    object-fit: cover;
+    object-position: center 35%;
+  }
+</style>

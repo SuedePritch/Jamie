@@ -125,14 +125,14 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Section and element reveals on scroll. */
-  --reveal-duration: 1400ms;
+  --reveal-duration: 2600ms;
   /* Gap between staggered siblings (cards, gallery items). */
-  --reveal-stagger: 160ms;
+  --reveal-stagger: 320ms;
 
   /* The hero slogan: each word is its own beat. The gap between words is
      NOT a token — it has to be emitted per-word in the markup as a real
      time value (see SLOGAN_STAGGER_MS in index.astro). */
-  --slogan-duration: 1100ms;
+  --slogan-duration: 2000ms;
 
   /* Interface feedback (hovers) stays quick — slow hovers feel broken. */
   --ui-duration: 200ms;
