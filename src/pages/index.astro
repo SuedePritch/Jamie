@@ -158,9 +158,9 @@ const description =
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgb(255 255 255 / 0.9);
+    background: var(--color-surface-translucent);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgb(35 48 59 / 0.08);
+    border-bottom: 1px solid var(--color-border-faint);
   }
   .nav__inner {
     display: flex;
@@ -170,7 +170,7 @@ const description =
     padding-block: var(--space-xs);
   }
   .nav__mark {
-    color: var(--charcoal);
+    color: var(--color-heading);
     font-family: var(--font-display);
     font-size: var(--step-1);
     font-weight: 600;
@@ -184,7 +184,7 @@ const description =
     list-style: none;
   }
   .nav__list a {
-    color: var(--charcoal);
+    color: var(--color-heading);
     font-size: var(--step--1);
     letter-spacing: 0.04em;
     text-decoration: none;
@@ -247,7 +247,7 @@ const description =
   }
 
   .eyebrow {
-    color: var(--blue);
+    color: var(--color-accent);
     font-size: var(--step--1);
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -276,26 +276,26 @@ const description =
     transition: background-color 200ms var(--ease-out);
   }
   .btn--solid {
-    background: var(--blue);
-    color: var(--white);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
   }
   .btn--solid:hover {
-    background: var(--blue-dark);
+    background: var(--color-accent-hover);
   }
   .btn--quiet {
-    border: 1px solid rgb(35 48 59 / 0.25);
-    color: var(--charcoal);
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-heading);
   }
   .btn--quiet:hover {
-    background: var(--pale);
+    background: var(--color-surface-tint);
   }
 
   /* Sections */
   .section--tint {
-    background: var(--pale);
+    background: var(--color-surface-tint);
   }
   .section--deep {
-    background: var(--blue-dark);
+    background: var(--color-accent-hover);
   }
 
   /* Opening */
@@ -318,7 +318,7 @@ const description =
     display: grid;
     gap: var(--space-s);
     padding-block: var(--space-xl);
-    border-top: 1px solid rgb(35 48 59 / 0.12);
+    border-top: 1px solid var(--color-border);
   }
   .commitment:first-child {
     border-top: 0;
@@ -335,10 +335,10 @@ const description =
     align-items: baseline;
     gap: var(--space-s);
   }
-  /* --blue, not --sky: sky is fill-only (2.26 on white, fails even the
-     large-text threshold). See the note in tokens.css. */
+  /* --color-accent, not --color-decorative: the decorative tone is fill-only
+     (2.26 on the base, failing even large-text). See the note in tokens.css. */
   .commitment__num {
-    color: var(--blue);
+    color: var(--color-accent);
     font-family: var(--font-display);
     font-size: var(--step-2);
     font-weight: 600;
@@ -349,7 +349,7 @@ const description =
     text-transform: uppercase;
   }
   .commitment__lead {
-    color: var(--charcoal);
+    color: var(--color-heading);
     font-family: var(--font-display);
     font-size: var(--step-2);
     line-height: 1.25;
@@ -363,8 +363,8 @@ const description =
   .commitment__pledge {
     margin-top: var(--space-m);
     padding-left: var(--space-s);
-    border-left: 3px solid var(--blue);
-    color: var(--charcoal);
+    border-left: 3px solid var(--color-accent);
+    color: var(--color-heading);
     font-size: var(--step-1);
     font-weight: 600;
   }
@@ -389,7 +389,7 @@ const description =
   }
   .theme {
     padding: var(--space-l);
-    background: var(--white);
+    background: var(--color-on-accent);
     border-radius: var(--radius);
   }
   .theme h3 {
@@ -397,7 +397,7 @@ const description =
   }
   .theme__areas {
     margin-top: var(--space-xs);
-    color: var(--charcoal-soft);
+    color: var(--color-text);
     font-size: var(--step--1);
     letter-spacing: 0.02em;
   }
@@ -426,8 +426,8 @@ const description =
   }
   .closing__eyebrow {
     margin-inline: auto;
-    /* --pale on deep blue (5.35); sky would be 2.74 and fail. */
-    color: var(--pale);
+    /* Muted-on-inverse (5.35); the decorative tone would be 2.74 and fail. */
+    color: var(--color-surface-tint);
     font-size: var(--step--1);
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -439,7 +439,7 @@ const description =
     list-style: none;
   }
   .closing__lines li {
-    color: var(--white);
+    color: var(--color-on-accent);
     font-family: var(--font-display);
     font-size: var(--step-3);
     line-height: 1.35;
@@ -447,7 +447,7 @@ const description =
   }
   .closing__tagline {
     margin: var(--space-l) auto 0;
-    color: var(--pale);
+    color: var(--color-surface-tint);
     font-size: var(--step-1);
     letter-spacing: 0.02em;
   }
@@ -463,8 +463,8 @@ const description =
   /* Footer */
   .footer {
     padding-block: var(--space-xl);
-    background: var(--charcoal);
-    color: var(--pale);
+    background: var(--color-heading);
+    color: var(--color-surface-tint);
   }
   .footer__inner {
     display: flex;
@@ -472,7 +472,7 @@ const description =
     gap: var(--space-s);
   }
   .footer__name {
-    color: var(--white);
+    color: var(--color-on-accent);
     font-family: var(--font-display);
     font-size: var(--step-1);
   }

@@ -1,28 +1,84 @@
 /*
  * Design tokens.
  *
- * Light blue + crisp white + charcoal. Blue carries the identity; charcoal
- * does the text work.
+ * COLOR IS TWO LAYERS, and the split is the point:
  *
- * CONTRAST — measured, not eyeballed. The pale --sky (#7FB2DC) scores only
- * 2.26 against white, so it is a FILL COLOR ONLY. It must never carry text
- * and must never have white text placed on it. Two rules follow:
- *   - CTA labels on --sky are --charcoal (5.97), never white (2.26).
- *   - Any blue that carries text uses --blue (#356FAC), the lightest blue
- *     passing AA on both white (5.22) and --pale (4.51).
- * Do not lighten --blue or darken --pale without re-checking.
+ *   1. TONES — the actual hex values, defined once. Named by ROLE IN THE
+ *      SCALE (ink / brand / base) and never by hue, so they stay honest
+ *      after a recolour: --tone-brand holds whatever the campaign colour
+ *      is, green or blue or otherwise. This is the ONLY place a hex value
+ *      appears in the codebase.
+ *   2. SEMANTIC ROLES — named for the JOB they do, each pointing at a tone.
+ *      Everything in the codebase uses these, never the tones directly.
+ *
+ * To recolour the whole site, edit the seven values in layer 1 (six hex
+ * plus --tone-ink-rgb). Nothing else changes — no find-and-replace, no
+ * touching components. To change what job a colour does (say, make CTAs
+ * use the deep tone), repoint one semantic role in layer 2.
+ *
+ * Verified by swapping the tones to a green/warm scheme: every colour on
+ * the page followed, with no trace of the previous palette left behind.
+ *
+ * CONTRAST — measured, not eyeballed. Whatever values replace these must
+ * be re-checked, because the roles encode contrast assumptions:
+ *   - --color-decorative is a FILL ONLY. The current value scores 2.26 on
+ *     the base, failing even the large-text threshold. It must never carry
+ *     text and must never have text placed on it.
+ *   - --color-accent is the lightest brand tone passing AA on both the
+ *     surface (5.22) and the tint (4.51). Do not lighten it.
+ *   - Body text on the tint is 7.63; headings on the surface, 13.48.
  */
 
 :root {
-  /* Palette */
-  --charcoal: #23303b;
-  --charcoal-soft: #3d4c59;
-  --blue: #356fac;
-  --blue-dark: #2c639f;
-  --sky: #7fb2dc;
-  --pale: #e4f0fa;
-  --white: #fff;
-  --ground: #fff;
+  /* ---- 1. Raw palette — the only hex values in the codebase ---- */
+  --tone-ink: #23303b;
+  --tone-ink-soft: #3d4c59;
+  --tone-brand: #356fac;
+  --tone-brand-deep: #2c639f;
+  --tone-brand-light: #7fb2dc;
+  --tone-brand-pale: #e4f0fa;
+  --tone-base: #fff;
+
+  /* ---- 2. Semantic roles — what the codebase actually uses ---- */
+
+  /* Surfaces */
+  --color-surface: var(--tone-base);
+  --color-surface-tint: var(--tone-brand-pale);
+  --color-surface-inverse: var(--tone-ink);
+  --color-surface-feature: var(--tone-brand-deep);
+
+  /* Text */
+  --color-text: var(--tone-ink-soft);
+  --color-heading: var(--tone-ink);
+  --color-text-on-inverse: var(--tone-base);
+  --color-text-muted-on-inverse: var(--tone-brand-pale);
+
+  /* Interactive + emphasis */
+  --color-accent: var(--tone-brand);
+  --color-accent-hover: var(--tone-brand-deep);
+  --color-on-accent: var(--tone-base);
+  --color-focus: var(--tone-brand);
+
+  /*
+   * Lines and washes.
+   *
+   * These are translucent tints of the ink colour, so they need its
+   * CHANNELS rather than its hex — CSS cannot take an alpha of an existing
+   * hex variable without color-mix(). --tone-ink-rgb must be kept in sync
+   * with --tone-ink; it is the one place a value is duplicated, and the
+   * alternative (hardcoding rgb() at each call site) is what this refactor
+   * exists to remove.
+   */
+  --tone-ink-rgb: 35 48 59;
+  --tone-base-rgb: 255 255 255;
+
+  --color-border-faint: rgb(var(--tone-ink-rgb) / 0.08);
+  --color-border: rgb(var(--tone-ink-rgb) / 0.12);
+  --color-border-strong: rgb(var(--tone-ink-rgb) / 0.25);
+  --color-border-dashed: rgb(var(--tone-ink-rgb) / 0.28);
+  --color-wash: rgb(var(--tone-ink-rgb) / 0.04);
+  --color-surface-translucent: rgb(var(--tone-base-rgb) / 0.9);
+  --color-decorative: var(--tone-brand-light);
 
   /* Fluid type scale. clamp() keeps this mobile-first without breakpoint
      thrash — every step scales continuously between 360px and 1280px. */

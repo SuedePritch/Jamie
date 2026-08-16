@@ -38,15 +38,15 @@ const { ratio = '4 / 5', label, class: className, ...rest } = Astro.props;
       repeating-linear-gradient(
         45deg,
         transparent 0 12px,
-        rgb(35 48 59 / 0.04) 12px 24px
+        var(--color-wash) 12px 24px
       ),
-      var(--pale);
-    border: 1px dashed rgb(35 48 59 / 0.28);
+      var(--color-surface-tint);
+    border: 1px dashed var(--color-border-dashed);
     border-radius: var(--radius);
   }
 
   .ph span {
-    color: var(--charcoal);
+    color: var(--color-heading);
     font-size: var(--step--1);
     font-weight: 600;
     letter-spacing: 0.08em;
