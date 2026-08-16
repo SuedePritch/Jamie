@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://suedepritch.github.io/Jamie/sitemap-index.xml

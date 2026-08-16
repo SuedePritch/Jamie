@@ -9,9 +9,13 @@ import { photos } from '../content/photos';
 // .slogan__word for why calc() from an index does not work.
 const SLOGAN_STAGGER_MS = 520;
 
-const title = `${site.candidate} — ${site.office}, ${site.city}`;
+// Title leads with the name (what people search) and carries the ward,
+// which is how municipal races are actually looked up. Kept under ~60
+// characters so it is not truncated in results.
+const title = `${site.candidate} — ${site.ward}, ${site.city}`;
 const description =
-  'Listen. Respect. Deliver. Jamie Scrimger for Thunder Bay City Council.';
+  `Jamie Scrimger is a candidate for ${site.ward} Councillor in ${site.city}. ` +
+  `Listen. Respect. Deliver. — 15+ years in emergency management.`;
 ---
 
 <Base title={title} description={description}>
@@ -33,13 +37,25 @@ const description =
     <section class="hero section--soft" id="top">
       <div class="shell hero__inner">
         <div class="hero__copy" data-reveal>
-          <p class="eyebrow">{site.office} · {site.city}</p>
+          <p class="eyebrow">{site.ward} · {site.city}</p>
+          {/*
+            The visible H1 is the slogan, but "Listen. Respect. Deliver."
+            names neither the candidate nor the city — poor for search and
+            for a screen reader landing on the page. The real H1 text is
+            the full name and office, visually hidden; the slogan follows
+            as styled display text inside it.
+          */}
           <h1 class="slogan">
-            {site.hero.slogan.map((word, i) => (
-              <span class="slogan__word" style={`--word-delay:${i * SLOGAN_STAGGER_MS}ms`}>
-                {word}
-              </span>
-            ))}
+            <span class="visually-hidden">
+              {site.candidate} — candidate for {site.ward} Councillor, {site.city}
+            </span>
+            <span aria-hidden="true" class="slogan__words">
+              {site.hero.slogan.map((word, i) => (
+                <span class="slogan__word" style={`--word-delay:${i * SLOGAN_STAGGER_MS}ms`}>
+                  {word}
+                </span>
+              ))}
+            </span>
           </h1>
           <p class="lede">{site.hero.intro}</p>
           <div class="actions">
@@ -176,13 +192,20 @@ const description =
             {site.involved.email}
           </a>
         </div>
+
+        {/* The date voters actually need. <time> gives it a machine-readable
+            value as well as the display string. */}
+        <p class="election">
+          Election day is{' '}
+          <time datetime={site.election.date}>{site.election.dateLabel}</time>.
+        </p>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="shell footer__inner">
-      <p class="footer__name">{site.candidate} — {site.office}, {site.city}</p>
+      <p class="footer__name">{site.candidate} — {site.ward} Councillor, {site.city}</p>
       <p class="footer__legal">{site.footer.disclaimer}</p>
     </div>
   </footer>
@@ -254,6 +277,11 @@ const description =
   /* The slogan is the campaign's whole identity — three words, stacked so
      each lands as its own statement rather than a run-on line. */
   .slogan {
+    display: block;
+  }
+  /* The words are now nested one level deeper, under the aria-hidden
+     wrapper, so the column stacking moves here. */
+  .slogan__words {
     display: flex;
     flex-direction: column;
   }
@@ -578,6 +606,14 @@ const description =
   }
   .involved .lede {
     margin-top: var(--space-s);
+  }
+  .election {
+    margin-top: var(--space-l);
+    padding-top: var(--space-m);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-heading);
+    font-size: var(--step-1);
+    font-family: var(--font-display);
   }
 
   /* Footer */

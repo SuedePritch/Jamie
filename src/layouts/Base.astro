@@ -7,13 +7,49 @@ import { url } from '../lib/url';
 // Imported as a URL so the hashed build filename stays correct.
 import displayLatin from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-opsz-normal.woff2?url';
 
+import { site } from '../content/site';
+
 interface Props {
   title: string;
   description: string;
 }
 
 const { title, description } = Astro.props;
+// Astro.url.pathname already includes the configured base, so this resolves
+// to the deployed subpath rather than the domain root.
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+/*
+ * Structured data. A Person entity is what lets search engines connect the
+ * name, the office being sought and the locality — the things someone
+ * actually searches for in a municipal race. Only facts already stated on
+ * the page are asserted here; nothing is invented for the markup's sake.
+ */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.candidate,
+  url: canonical,
+  jobTitle: `Candidate for ${site.ward} Councillor`,
+  description: description,
+  homeLocation: {
+    '@type': 'Place',
+    name: `${site.city}, Ontario, Canada`,
+  },
+  knowsAbout: [
+    'Emergency management',
+    'Municipal government',
+    'Community resilience',
+    'Infrastructure planning',
+  ],
+  // The office sought, with the term's start date. Both are stated facts,
+  // not inferred.
+  seeks: {
+    '@type': 'Role',
+    roleName: `${site.ward} Councillor`,
+    startDate: site.election.termStart,
+  },
+};
 ---
 
 <!doctype html>
@@ -29,13 +65,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="generator" content={Astro.generator} />
     <link rel="preload" href={displayLatin} as="font" type="font/woff2" crossorigin />
 
-    <!-- Social preview. TODO: add a real og:image (1200x630) before launch —
-         shared links look broken without one. -->
+    <!-- Social preview. The image must be an absolute URL: relative paths
+         are not resolved by the crawlers that read these tags. -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={`${site.candidate} for ${site.ward}`} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(url('/og-image.jpg'), Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.candidate}, candidate for ${site.ward} Councillor in ${site.city}.`} />
+    <meta property="og:locale" content="en_CA" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={new URL(url('/og-image.jpg'), Astro.site).href} />
+    <meta name="theme-color" content="#17406e" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   </head>
 
   <body>

@@ -17,8 +17,15 @@ export const site = {
   candidate: 'Jamie Scrimger',
   office: 'City Council',
   city: 'Thunder Bay',
-  // TODO: confirm which ward/at-large seat, and the election date.
-  ward: '[TODO ward or at-large]',
+  ward: 'Red River Ward',
+  // Thunder Bay municipal election. ISO forms are for machine-readable
+  // markup; the display strings are what appears on the page.
+  election: {
+    date: '2026-10-26',
+    dateLabel: 'October 26, 2026',
+    termStart: '2026-11-15',
+    termStartLabel: 'November 15, 2026',
+  },
 
   nav: [
     { label: 'Commitment', href: '#commitment' },
