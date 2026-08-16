@@ -2,10 +2,12 @@
  * Self-hosted fonts (no CDN: third-party font hosts leak visitor IPs, which
  * is a poor look on a campaign site, and self-hosting is faster anyway).
  *
- * Fraunces "soft" build rather than "full": it carries the SOFT axis this
- * design uses at 64K instead of the full multi-axis file's 120K.
+ * Source Serif 4 is the native companion to Source Sans 3 (same designer,
+ * same programme), so the pairing is designed rather than assembled. It
+ * replaced Fraunces, whose descending curled J drew attention every time
+ * the candidate's name appeared — which on this page is constantly.
  */
-@import '@fontsource-variable/fraunces/soft.css';
+@import '@fontsource-variable/source-serif-4/opsz.css';
 @import '@fontsource-variable/source-sans-3/wght.css';
 @import './tokens.css';
 
@@ -52,16 +54,11 @@ h3 {
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-wrap: balance;
-  /* opsz defaults to 14 (a body-text optical size) and the soft build does
-     not pin it, so headings must ask for a display size explicitly or they
-     render with body proportions at large sizes.
-     SOFT rounds the terminals — warm rather than austere, which is the
-     whole reason for picking Fraunces over a stiffer serif. WONK stays 0:
-     its quirkier alternates undercut the credibility a candidate needs. */
-  font-variation-settings:
-    'opsz' 96,
-    'SOFT' 30,
-    'WONK' 0;
+  /* opsz defaults to 14 (a body-text optical size) and the shipped build
+     does not pin it, so headings must request a display size explicitly or
+     they render with body proportions when set large. Source Serif's opsz
+     axis tops out at 60, unlike Fraunces' 96. */
+  font-variation-settings: 'opsz' 60;
 }
 
 h1 {

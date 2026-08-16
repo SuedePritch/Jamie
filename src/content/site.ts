@@ -32,7 +32,7 @@ export const site = {
     slogan: ['Listen.', 'Respect.', 'Deliver.'],
     tagline: 'Leadership is service.',
     intro:
-      'I believe being a municipal councillor is a responsibility to serve the people of Thunder Bay.',
+      `I believe a municipal councillor's responsibility is to serve the people of Thunder Bay.`,
     primaryCta: { label: 'Get involved', href: '#involved' },
     secondaryCta: { label: 'Read my commitment', href: '#commitment' },
   },

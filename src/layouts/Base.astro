@@ -5,7 +5,7 @@ import { url } from '../lib/url';
 // Preload the display face: it renders in the hero headline, so letting it
 // arrive late means a visible swap on the most prominent text on the page.
 // Imported as a URL so the hashed build filename stays correct.
-import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-soft-normal.woff2?url';
+import displayLatin from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-opsz-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -27,7 +27,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
     <link rel="icon" href={url('/favicon.ico')} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={displayLatin} as="font" type="font/woff2" crossorigin />
 
     <!-- Social preview. TODO: add a real og:image (1200x630) before launch —
          shared links look broken without one. -->
