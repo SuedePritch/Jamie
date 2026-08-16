@@ -22,6 +22,7 @@ export const site = {
 
   nav: [
     { label: 'Commitment', href: '#commitment' },
+    { label: 'About', href: '#about' },
     { label: 'Priorities', href: '#priorities' },
     { label: 'Community', href: '#community' },
     { label: 'Get involved', href: '#involved' },
@@ -41,6 +42,65 @@ export const site = {
     body: [
       'That means listening to our community, respecting people and their different perspectives, and working together to get things done.',
       'I don’t believe we need to agree on everything to make our city better. In fact, I believe healthy disagreement makes for better decisions—when we are willing to listen, debate ideas, and treat one another with respect.',
+    ],
+  },
+
+  /*
+   * About — the person, not the philosophy. The opening and commitments
+   * already carry what Jamie believes; this section is for who she is,
+   * where she comes from, and what she has done. Keep it factual and
+   * verifiable: biography on a campaign site gets scrutinised, so every
+   * claim here needs to be one Jamie can stand behind.
+   *
+   * ALL PLACEHOLDER — awaiting real copy.
+   */
+  about: {
+    heading: 'About Jamie',
+    lead: 'Thunder Bay has become more than just where I live. It’s where I’ve built my life, my career, my connections and my commitment to the community I’m proud to call home.',
+
+    /*
+     * Grouped into three movements — roots, career, leadership — rather
+     * than run as one block. The bio is long, and unbroken prose on a
+     * phone is where readers give up.
+     *
+     * Jamie's draft closed by restating LISTEN / RESPECT / DELIVER. That
+     * is deliberately NOT repeated here: the hero, the commitments and the
+     * closing already carry it, and a fourth repetition inside About
+     * dilutes the line rather than reinforcing it.
+     */
+    groups: [
+      {
+        title: 'Roots in the North',
+        body: [
+          'Born in Thompson, Manitoba, I grew up moving around Northern Canada as my father’s career in mining took our family to different communities. Those experiences gave me an early appreciation for the people, resilience and character that make northern communities special.',
+          'Our family eventually settled in Kenora, where I spent my teenage years. In 2009, I moved to Thunder Bay—and I’ve been proud to call this community home ever since.',
+        ],
+      },
+      {
+        title: 'A career in preparedness and response',
+        body: [
+          'For more than 15 years, my career has focused on helping communities and organizations prepare for challenges, respond when things go wrong and become stronger afterward.',
+          'I have worked with community leaders, governments, emergency services, First Nations and other partners to identify risks, develop plans, coordinate resources and respond to emergencies. My experience includes wildfire response, emergency operations, evacuation planning, business continuity, public communication, crisis response and community resilience.',
+          'Much of my work has involved bringing people and organizations together when the situation is complex and the stakes are high. I have advised senior leaders, managed teams and resources, developed policies and procedures, secured funding, delivered training and helped communities prepare for a wide range of risks—from wildfire and flooding to infrastructure failures, medical emergencies and other crises.',
+          'I have also worked extensively with First Nations communities and organizations, helping strengthen emergency-management capacity, develop best practices and build relationships across municipal, provincial, federal and Indigenous governments.',
+        ],
+      },
+      {
+        title: 'How I approach leadership',
+        body: [
+          'These experiences have shaped how I approach leadership.',
+          'I believe good leaders don’t need to have all the answers. They need to listen, ask the right questions, understand the facts, bring people together and make thoughtful decisions.',
+          'I also believe we can disagree without becoming divided. Municipal politics should be about solving problems—not personal attacks. I will be prepared to challenge ideas and ask difficult questions, while treating people with respect.',
+        ],
+      },
+    ],
+
+    // Short, checkable facts drawn from the bio above — nothing asserted
+    // here that the prose does not already support.
+    facts: [
+      { label: 'In Thunder Bay since', value: '2009' },
+      { label: 'Years in the field', value: '15+' },
+      { label: 'Focus', value: 'Emergency management' },
     ],
   },
 
