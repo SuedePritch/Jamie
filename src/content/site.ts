@@ -74,7 +74,7 @@ export const site = {
         ],
       },
       {
-        title: 'A career in preparedness and response',
+        title: 'A career in emergency management',
         body: [
           'For more than 15 years, my career has focused on helping communities and organizations prepare for challenges, respond when things go wrong and become stronger afterward.',
           'I have worked with community leaders, governments, emergency services, First Nations and other partners to identify risks, develop plans, coordinate resources and respond to emergencies. My experience includes wildfire response, emergency operations, evacuation planning, business continuity, public communication, crisis response and community resilience.',
