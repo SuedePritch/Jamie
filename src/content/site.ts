@@ -31,7 +31,6 @@ export const site = {
     { label: 'Commitment', href: '#commitment' },
     { label: 'About', href: '#about' },
     { label: 'Priorities', href: '#priorities' },
-    { label: 'Get involved', href: '#involved' },
   ],
 
   hero: {
@@ -39,7 +38,7 @@ export const site = {
     tagline: 'Leadership is service.',
     intro:
       `I believe a municipal councillor's responsibility is to serve the people of Thunder Bay.`,
-    primaryCta: { label: 'Get involved', href: '#involved' },
+    primaryCta: { label: 'About me', href: '#about' },
     secondaryCta: { label: 'Read my commitment', href: '#commitment' },
   },
 
@@ -130,7 +129,7 @@ export const site = {
     },
     {
       key: 'Deliver',
-      lead: 'Leadership means turning good intentions into results.',
+      lead: 'Turning good intentions into results.',
       body: [
         'Residents expect their municipal government to get things done.',
         'I will focus on practical priorities that Council can actually influence, understand the costs and long-term consequences of decisions, and work with the people and organizations needed to make good ideas happen.',
@@ -189,14 +188,8 @@ export const site = {
     tagline: 'Leadership is service.',
   },
 
-  involved: {
-    heading: 'Get involved',
-    // TODO: Jamie to supply the real invitation line.
-    body: '[TODO a line inviting people to volunteer, host a sign, or get in touch.]',
-    // TODO: a real destination — a static site cannot process form posts,
-    // so this needs a mailto: or a hosted form service.
-    ctaLabel: 'Volunteer',
-    ctaHref: '#',
+  contact: {
+    heading: 'Get in touch',
     email: '[TODO campaign email]',
   },
 
