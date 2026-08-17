@@ -190,7 +190,26 @@ export const site = {
 
   contact: {
     heading: 'Get in touch',
-    email: '[TODO campaign email]',
+    email: 'jamiescrimgertbay@gmail.com',
+
+    /*
+     * Contributions are regulated by Ontario's Municipal Elections Act, 1996:
+     * per-contributor limits apply, only individuals may contribute (not
+     * corporations or unions), and contributors must supply a name and address
+     * so the campaign can issue receipts and file its financial statement.
+     * The note below tells contributors what the campaign needs from them; the
+     * contribution limit is deliberately not stated as a number here because
+     * it should be confirmed against the Clerk's candidate guide before being
+     * published as a figure.
+     */
+    donations: {
+      heading: 'Support the campaign',
+      body:
+        'Contributions can be sent by Interac e-Transfer to the campaign email above. ' +
+        'Ontario rules allow contributions from individuals only — not from corporations ' +
+        'or unions — so please include your full name and mailing address with your ' +
+        'transfer. We need those details to issue your receipt.',
+    },
   },
 
   footer: {
