@@ -58,12 +58,15 @@ const description =
             </span>
           </h1>
           <p class="lede">{site.hero.intro}</p>
-          <div class="actions">
+          <div class="actions actions--equal">
             <a class="btn btn--solid" href={site.hero.primaryCta.href}>
               {site.hero.primaryCta.label}
             </a>
             <a class="btn btn--quiet" href={site.hero.secondaryCta.href}>
               {site.hero.secondaryCta.label}
+            </a>
+            <a class="btn btn--quiet" href={site.hero.tertiaryCta.href}>
+              {site.hero.tertiaryCta.label}
             </a>
           </div>
         </div>
@@ -208,7 +211,11 @@ const description =
 
   <footer class="footer">
     <div class="shell footer__inner">
-      <p class="footer__name">{site.candidate} — {site.ward} Councillor, {site.city}</p>
+      {/* "Candidate for Councillor" — not "Councillor". She is running for the
+          seat, not holding it, and the footer must not imply incumbency. */}
+      <p class="footer__name">
+        {site.candidate} — Candidate for Councillor, {site.ward}, {site.city}
+      </p>
       <p class="footer__legal">{site.footer.disclaimer}</p>
     </div>
   </footer>
@@ -315,6 +322,20 @@ const description =
     flex-wrap: wrap;
     gap: var(--space-s);
     margin-top: var(--space-l);
+  }
+  /*
+   * Equal-width button group: stacked full-width on narrow screens, then
+   * equal columns once there is room. 1fr columns rather than auto sizing
+   * keeps every button the same width regardless of label length, so the
+   * row reads as one control group.
+   */
+  /* Stacked, equal-width buttons. */
+  .actions--equal {
+    display: grid;
+    gap: var(--space-s);
+  }
+  .actions--equal .btn {
+    text-align: center;
   }
   .btn {
     display: inline-block;

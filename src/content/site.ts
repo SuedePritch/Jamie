@@ -40,6 +40,7 @@ export const site = {
       `I believe a municipal councillor's responsibility is to serve the people of Thunder Bay.`,
     primaryCta: { label: 'About me', href: '#about' },
     secondaryCta: { label: 'Read my commitment', href: '#commitment' },
+    tertiaryCta: { label: 'My priorities', href: '#priorities' },
   },
 
   opening: {
@@ -111,7 +112,7 @@ export const site = {
       key: 'Listen',
       lead: 'Good decisions begin by listening.',
       body: [
-        'I will take the time to hear from residents, businesses, community organizations, Indigenous partners, City staff and my fellow councillors.',
+        'I will take the time to hear from residents, businesses, community organizations, partners, City staff and my fellow councillors.',
         'I will seek out different perspectives, ask questions and look at the evidence before making decisions.',
         'Listening doesn’t mean I will always agree. It means I will make the effort to understand.',
       ],
