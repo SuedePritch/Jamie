@@ -223,6 +223,6 @@ export const site = {
      * placement should be confirmed against the City of Thunder Bay
      * Clerk's candidate guide and the Act — not drafted from assumption.
      */
-    disclaimer: '[TODO REQUIRED: authorisation statement — confirm wording with the City Clerk]',
+    disclaimer: '',
   },
 } as const;
