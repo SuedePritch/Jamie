@@ -158,18 +158,23 @@ const description =
       </div>
     </section>
 
-    <!-- Priority themes -->
+    <!-- Priorities -->
     <section class="section section--tint" id="priorities">
       <div class="shell">
-        <h2 data-reveal>Priorities</h2>
-        <ul class="themes">
+        <h2 data-reveal>My Priorities</h2>
+        <p class="themes__intro" data-reveal data-reveal-delay="320">
+          {site.prioritiesIntro}
+        </p>
+        <ol class="themes">
           {site.priorities.map((p, i) => (
-            <li class="theme" data-reveal data-reveal-delay={(i % 3) * 320}>
+            <li class="theme" data-reveal data-reveal-delay={(i % 2) * 320}>
+              <span class="theme__num">{String(i + 1).padStart(2, '0')}</span>
               <h3>{p.title}</h3>
-              <p class="theme__areas">{p.areas.join(' · ')}</p>
+              {p.body.map((para) => <p class="theme__para">{para}</p>)}
             </li>
           ))}
-        </ul>
+        </ol>
+        <p class="themes__outro" data-reveal>{site.prioritiesOutro}</p>
       </div>
     </section>
 
@@ -564,22 +569,25 @@ const description =
     font-size: var(--step-1);
   }
 
-  /* Priority themes */
+  /* Priorities */
+  .themes__intro {
+    max-width: 60ch;
+    margin-top: var(--space-m);
+    font-size: var(--step-0);
+  }
+  /* Two columns, not three: there are four priorities, and a 3-up grid
+     leaves a lone card stranded on the second row. */
   .themes {
     display: grid;
     gap: var(--space-m);
     margin-top: var(--space-xl);
     padding: 0;
     list-style: none;
+    counter-reset: theme;
   }
-  @media (min-width: 40rem) {
+  @media (min-width: 52rem) {
     .themes {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (min-width: 62rem) {
-    .themes {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .theme {
@@ -587,14 +595,28 @@ const description =
     background: var(--color-on-accent);
     border-radius: var(--radius);
   }
+  .theme__num {
+    display: block;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: var(--step--1);
+    letter-spacing: 0.14em;
+  }
   .theme h3 {
+    margin-top: var(--space-2xs);
     font-size: var(--step-1);
   }
-  .theme__areas {
-    margin-top: var(--space-xs);
+  .theme__para {
+    margin-top: var(--space-s);
     color: var(--color-text);
     font-size: var(--step--1);
-    letter-spacing: 0.02em;
+  }
+  .themes__outro {
+    max-width: 60ch;
+    margin-top: var(--space-xl);
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
   }
 
   /* Closing */
