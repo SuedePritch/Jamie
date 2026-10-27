@@ -21,16 +21,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 /*
  * Structured data. A Person entity is what lets search engines connect the
- * name, the office being sought and the locality — the things someone
- * actually searches for in a municipal race. Only facts already stated on
+ * name, the office held and the locality — the things someone actually
+ * searches for when looking up their councillor. Only facts already stated on
  * the page are asserted here; nothing is invented for the markup's sake.
  */
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: site.candidate,
+  name: site.name,
   url: canonical,
-  jobTitle: `Candidate for ${site.ward} Councillor`,
+  jobTitle: `${site.ward} Councillor`,
   description: description,
   homeLocation: {
     '@type': 'Place',
@@ -42,13 +42,6 @@ const personSchema = {
     'Community resilience',
     'Infrastructure planning',
   ],
-  // The office sought, with the term's start date. Both are stated facts,
-  // not inferred.
-  seeks: {
-    '@type': 'Role',
-    roleName: `${site.ward} Councillor`,
-    startDate: site.election.termStart,
-  },
 };
 ---
 
@@ -68,14 +61,14 @@ const personSchema = {
     <!-- Social preview. The image must be an absolute URL: relative paths
          are not resolved by the crawlers that read these tags. -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={`${site.candidate} for ${site.ward}`} />
+    <meta property="og:site_name" content={`${site.name}, ${site.ward} Councillor`} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(url('/og-image.jpg'), Astro.site).href} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${site.candidate}, candidate for ${site.ward} Councillor in ${site.city}.`} />
+    <meta property="og:image:alt" content={`${site.name}, ${site.ward} Councillor in ${site.city}.`} />
     <meta property="og:locale" content="en_CA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={new URL(url('/og-image.jpg'), Astro.site).href} />

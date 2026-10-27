@@ -26,7 +26,7 @@ import puppy from '../assets/photos-studio/puppy.webp';
 export const photos = {
   /*
    * Hero: the close headshot. Direct eye contact and a clear face at small
-   * sizes, which is what a candidate's hero needs to do first.
+   * sizes, which is what a councillor's hero needs to do first.
    */
   hero: {
     src: studioHeadshot,
